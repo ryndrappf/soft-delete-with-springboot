@@ -24,7 +24,7 @@ public class BookController {
     }
 
     @GetMapping
-    public Iterable<Books> findAll(){
-        return bookService.findAll();
+    public Iterable<Books> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
+        return bookService.findAll(isDeleted);
     }
 }

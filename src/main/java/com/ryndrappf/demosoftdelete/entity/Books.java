@@ -1,14 +1,17 @@
 package com.ryndrappf.demosoftdelete.entity;
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_books")
 @SQLDelete(sql = "UPDATE tbl_books SET deleted = true WHERE id=?")
-@Where(clause = "deleted = false")
+//@Where(clause = "deleted = false")
+@FilterDef(name = "deletedBookFilter", parameters = @ParamDef(name = "isDeleted", type = "boolean"))
+@Filter(name = "deletedBookFilter", condition = "deleted = :isDeleted ")
 public class Books {
 
     @Id
